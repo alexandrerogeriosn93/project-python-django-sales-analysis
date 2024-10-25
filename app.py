@@ -81,6 +81,20 @@ ax_monthly_sales.set_title('Tendência de vendas mensais')
 
 st.pyplot(fig_monthly_sales)
 
+st.subheader('Vendas acumuladas')
+
+data['cumulative_quantity'] = data.groupby('date')['quantity'].cumsum()
+
+fig_cumulative, ax_cumulative = plt.subplots()
+
+data.groupby('date')['cumulative_quantity'].max().plot(ax=ax_cumulative)
+
+ax_cumulative.set_xlabel('Data')
+ax_cumulative.set_ylabel('Quantidade vendida acumulada')
+ax_cumulative.set_title('Vendas acumuladas ao longo do tempo')
+
+st.pyplot(fig_cumulative)
+
 st.subheader('Exportar dados para CSV')
 
 csv = data.to_csv(index=False)
