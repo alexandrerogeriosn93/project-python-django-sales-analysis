@@ -37,7 +37,7 @@ data = load_data(start_date=start_date, end_date=end_date, product=product)
 st.title('Análise de vendas')
 st.subheader('Dataset de vendas')
 st.dataframe(data, use_container_width=True)
-st.subheader('Gráfico de vendas')
+st.subheader('Gráfico de vendas por data')
 
 fig, ax = plt.subplots()
 
@@ -48,3 +48,16 @@ ax.set_xlabel('Data')
 ax.set_ylabel('Quantidade vendida')
 
 st.pyplot(fig)
+
+st.subheader('Gráfico de vendas por produto')
+
+product_sales = data.groupby('product')['quantity'].sum().reset_index()
+fig_sales, ax_sales = plt.subplots()
+
+product_sales.plot(kind='bar', x='product', y='quantity', ax=ax_sales)
+
+ax_sales.set_xlabel('Produto')
+ax_sales.set_ylabel('Quantidade vendida')
+ax_sales.set_title('Vendas por produto')
+
+st.pyplot(fig_sales)
