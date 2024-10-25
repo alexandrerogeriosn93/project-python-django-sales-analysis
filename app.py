@@ -13,7 +13,7 @@ data = load_data()
 
 st.title('Análise de vendas')
 st.subheader('Dataset de vendas')
-st.table(data)
+st.dataframe(data)
 st.subheader('Gráfico de vendas')
 
 fig, ax = plt.subplots()
