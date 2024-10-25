@@ -61,3 +61,14 @@ ax_sales.set_ylabel('Quantidade vendida')
 ax_sales.set_title('Vendas por produto')
 
 st.pyplot(fig_sales)
+
+st.subheader('Exportar dados para CSV')
+
+csv = data.to_csv(index=False)
+
+st.download_button(
+    label='Baixar dados com CSV',
+    data=csv,
+    file_name='dados_vendas.csv',
+    mime='text/csv'
+)
