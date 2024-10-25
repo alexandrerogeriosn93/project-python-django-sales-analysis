@@ -62,6 +62,25 @@ ax_sales.set_title('Vendas por produto')
 
 st.pyplot(fig_sales)
 
+st.subheader('Tendência de vendas mensais')
+
+monthly_sales = data.resample('M', on='date')['quantity'].sum().reset_index()
+fig_monthly_sales, ax_monthly_sales = plt.subplots()
+
+monthly_sales.plot(
+    kind='line',
+    x='date',
+    y='quantity',
+    ax=ax_monthly_sales,
+    marker='o'
+)
+
+ax_monthly_sales.set_xlabel('Data')
+ax_monthly_sales.set_ylabel('Quantidade vendida')
+ax_monthly_sales.set_title('Tendência de vendas mensais')
+
+st.pyplot(fig_monthly_sales)
+
 st.subheader('Exportar dados para CSV')
 
 csv = data.to_csv(index=False)
